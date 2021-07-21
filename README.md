@@ -10,4 +10,4 @@ O sistema será construído na linguagem Java usando o paradigma de programaçã
 * Funcionamneto
 O sistema irá cadastrar alunos e funcionários da universidade para que sua entrada seja liberada de forma automática pela cancela. A entrada manual ficara restrita apenas a visitantes. Além disso irá dividir o estacionamento em zonas, com isso direcionando os veículos para regiões com vagas e bloqueando zonas cheias.
 
-![Diagrama UML]C:\Users\Fabiano\Desktop\QS_02\POO\projeto\diagrama.png
+![Diagrama UML](diagrama.png)
