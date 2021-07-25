@@ -1,17 +1,17 @@
 package br.edu.ufabc.poo.estacionamento.modelo;
 import br.edu.ufabc.poo.estacionamento.enums.TipoVeiculo;
 
-public class veiculo {
+public class Veiculo {
 	
 	private String placa;
 	private TipoVeiculo tipoVeiculo;
 	private String modelo;
 	
-	public veiculo(String placa) {
+	public Veiculo(String placa) {
 		this.placa = placa;
 	}
 
-	public veiculo(String placa, TipoVeiculo tipoVeiculo, String modelo) {
+	public Veiculo(String placa, TipoVeiculo tipoVeiculo, String modelo) {
 		this.placa = placa;
 		this.tipoVeiculo = tipoVeiculo;
 		this.modelo = modelo;

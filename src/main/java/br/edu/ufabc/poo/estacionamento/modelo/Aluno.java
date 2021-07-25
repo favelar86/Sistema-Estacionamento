@@ -8,20 +8,18 @@ public class Aluno extends Usuario {
 	private double ra;
 	private Turno turno;
 
-	public Aluno(int id, String nome, ArrayList<veiculo> veiculos, double ra, Turno turno) {
-		super(id, nome, veiculos);
+	public Aluno(String nome, ArrayList<Veiculo> veiculos, double ra, Turno turno) {
+		super(nome, veiculos);
 		this.ra = ra;
 		this.turno = turno;
 	}
 
-	@Override
-	public String Entrar() {
-		return null;
+	public double getRa() {
+		return ra;
 	}
 
-	@Override
-	public String Sair() {
-		return null;
+	public Turno getTurno() {
+		return turno;
 	}
 
 }

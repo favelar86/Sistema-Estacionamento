@@ -7,19 +7,17 @@ public class Funcionario extends Usuario {
 	private double registro;
 	private int numeroVaga;
 
-	public Funcionario(int id, String nome, ArrayList<veiculo> veiculos, double registro) {
-		super(id, nome, veiculos);
+	public Funcionario(String nome, ArrayList<Veiculo> veiculos, double registro) {
+		super(nome, veiculos);
 		this.registro = registro;
 	}
 
-	@Override
-	public String Entrar() {
-		return null;
+	public double getRegistro() {
+		return registro;
 	}
 
-	@Override
-	public String Sair() {
-		return null;
+	public int getNumeroVaga() {
+		return numeroVaga;
 	}
 
 }
