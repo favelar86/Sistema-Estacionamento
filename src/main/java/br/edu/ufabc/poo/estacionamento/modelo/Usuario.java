@@ -12,16 +12,24 @@ public abstract class Usuario {
 	protected int id;
 	protected String nome;
 	protected String telefone;
-	protected ArrayList<Veiculo> veiculos;
+	protected Veiculo veiculo;
 	protected Date dataEntrada;
 	protected Date dataSaida;
 	
-	public Usuario(String nome, ArrayList<Veiculo> veiculos) {
+	public Usuario(String nome, Veiculo veiculo) {
 		this.id = ultimoId++;
 		this.nome = nome;
-		this.veiculos = veiculos;
+		this.veiculo = veiculo;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
 	public String Entrar() {
 		
 		dataEntrada = new Date();

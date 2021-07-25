@@ -6,16 +6,16 @@ import br.edu.ufabc.poo.estacionamento.enums.Predios;
 
 public class Visitante extends Usuario {
 	
-	private double cpf;
+	private String cpf;
 	private Predios predio;
 
-	public Visitante(String nome, double cpf, Predios predio, ArrayList<Veiculo> veiculos) {
-		super(nome, veiculos);
+	public Visitante(String nome, String cpf, Predios predio, Veiculo veiculo) {
+		super(nome, veiculo);
 		this.cpf = cpf;
 		this.predio = predio;
 	}
 
-	public double getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 

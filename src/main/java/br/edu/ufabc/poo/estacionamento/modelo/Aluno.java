@@ -8,8 +8,8 @@ public class Aluno extends Usuario {
 	private double ra;
 	private Turno turno;
 
-	public Aluno(String nome, ArrayList<Veiculo> veiculos, double ra, Turno turno) {
-		super(nome, veiculos);
+	public Aluno(String nome, Veiculo veiculo, double ra, Turno turno) {
+		super(nome, veiculo);
 		this.ra = ra;
 		this.turno = turno;
 	}

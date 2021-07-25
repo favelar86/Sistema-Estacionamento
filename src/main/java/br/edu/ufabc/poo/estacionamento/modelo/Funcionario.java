@@ -7,8 +7,8 @@ public class Funcionario extends Usuario {
 	private double registro;
 	private int numeroVaga;
 
-	public Funcionario(String nome, ArrayList<Veiculo> veiculos, double registro) {
-		super(nome, veiculos);
+	public Funcionario(String nome, Veiculo veiculo, double registro) {
+		super(nome, veiculo);
 		this.registro = registro;
 	}
 
