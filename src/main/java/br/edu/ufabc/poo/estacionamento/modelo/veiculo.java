@@ -29,5 +29,10 @@ public class Veiculo {
 	public String getModelo() {
 		return modelo;
 	}
+
+	@Override
+	public String toString() {
+		return "placa=" + placa + ", tipoVeiculo=" + tipoVeiculo + ", modelo=" + modelo;
+	}
 	
 }

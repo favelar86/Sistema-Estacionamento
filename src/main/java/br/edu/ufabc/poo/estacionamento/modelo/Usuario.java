@@ -1,12 +1,9 @@
 package br.edu.ufabc.poo.estacionamento.modelo;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class Usuario {
-
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
 	private static int ultimoId = 0;
 	
 	protected int id;
@@ -30,16 +27,26 @@ public abstract class Usuario {
 		return nome;
 	}
 
-	public String Entrar() {
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public Date Entrar() {
 		
-		dataEntrada = new Date();
-		return sdf.format(dataEntrada);
+		return dataEntrada = new Date();
 	}
 	
-	public String Sair() {
+	public Date Sair() {
 		
-		dataSaida = new Date();
-		return sdf.format(dataSaida);
+		return dataSaida = new Date();
 	}
 	
 }

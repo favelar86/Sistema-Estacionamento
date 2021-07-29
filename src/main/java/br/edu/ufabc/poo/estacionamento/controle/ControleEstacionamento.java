@@ -1,12 +1,14 @@
 package br.edu.ufabc.poo.estacionamento.controle;
 
 import java.util.ArrayList;
-
 import br.edu.ufabc.poo.estacionamento.enums.Predios;
 import br.edu.ufabc.poo.estacionamento.enums.TipoVeiculo;
+import br.edu.ufabc.poo.estacionamento.enums.Turno;
+import br.edu.ufabc.poo.estacionamento.modelo.Funcionario;
 import br.edu.ufabc.poo.estacionamento.modelo.Usuario;
 import br.edu.ufabc.poo.estacionamento.modelo.Veiculo;
-import br.edu.ufabc.poo.estacionamento.modelo.Visitante; 
+import br.edu.ufabc.poo.estacionamento.modelo.Visitante;
+import br.edu.ufabc.poo.estacionamento.modelo.Aluno;
 
 public class ControleEstacionamento {
 	
@@ -35,14 +37,31 @@ public class ControleEstacionamento {
 		}
 		
 		Visitante visitante = new Visitante(nome, cpf, predio, carro);
+		visitante.Entrar();
 		this.usuarios.add(visitante);
 		
 		String retorno = BuscaVaga(carro);
-		return "Entrada Liberada" + retorno;	
+		return "Entrada Liberada " + retorno;	
+	}
+	
+	public String EntradaAutomatica(String nome) {
+		
+		Usuario usuario = buscarUsuario(nome);
+		
+		if((usuario instanceof Funcionario) && ((Funcionario) usuario).getNumeroVaga() != 0) {
+			
+			vagasReservadas++;
+		}
+		else {
+			
+			BuscaVaga(usuario.getVeiculo());
+		}
+		
+		return null;
 	}
 	
 	public Usuario buscarUsuario(String nome) {
-		Usuario usuario = usuarios.stream().filter(x -> x.getNome() == nome).findFirst().orElse(null);
+		Usuario usuario = usuarios.stream().filter(x -> x.getNome().equals(nome)).findFirst().orElse(null);
 		
 		return usuario;
 	}
@@ -83,6 +102,37 @@ public class ControleEstacionamento {
 		}
 		
 		return retorno;
+	}
+	
+	public Aluno adicionarAluno(String nome, Veiculo veiculo, String ra, Turno turno) {
+		Aluno aluno = new Aluno(nome, veiculo, ra, turno);
+		this.usuarios.add(aluno);
+		
+		return aluno;
+	}
+	
+	public Funcionario adicionarFuncionario(String nome, Veiculo veiculo, String registro) {
+		Funcionario funcionario = new Funcionario(nome, veiculo, registro);
+		this.usuarios.add(funcionario);
+		
+		return funcionario;
+	}
+	
+	public boolean removerUsuario(String nome) {
+		Usuario usuario = usuarios.stream().filter(x -> x.getNome().equals(nome)).findFirst().orElse(null);
+		
+		try {
+			usuarios.remove(usuarios.indexOf(usuario));
+			System.out.println("Usuário removido com sucessso!");
+			
+			return true;
+		}
+		catch(IndexOutOfBoundsException e) {
+			System.out.println("\n");
+			System.out.println("Esse Id não existe!");
+			
+			return false;
+		}	
 	}
 	
 }

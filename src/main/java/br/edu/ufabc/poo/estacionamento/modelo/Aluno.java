@@ -1,25 +1,34 @@
 package br.edu.ufabc.poo.estacionamento.modelo;
 
-import java.util.ArrayList;
 import br.edu.ufabc.poo.estacionamento.enums.Turno;
 
 public class Aluno extends Usuario {
 	
-	private double ra;
+	private String ra;
 	private Turno turno;
 
-	public Aluno(String nome, Veiculo veiculo, double ra, Turno turno) {
+	public Aluno(String nome, Veiculo veiculo, String ra, Turno turno) {
 		super(nome, veiculo);
 		this.ra = ra;
 		this.turno = turno;
 	}
 
-	public double getRa() {
+	public String getRa() {
 		return ra;
 	}
 
 	public Turno getTurno() {
 		return turno;
+	}
+
+	@Override
+	public String toString() {
+		return "Aluno: Id = " + id + "\n" +
+				"Nome = " + nome +   "\n" +
+				"RA = " + ra + "\n" + 
+				"Turno = " + turno + "\n" +
+				"Telefone = " + telefone + "\n" +
+				"Veiculo = " + veiculo;
 	}
 
 }
