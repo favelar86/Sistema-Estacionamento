@@ -49,6 +49,10 @@ public class Principal {
 					entradaManual();
 					break;
 				}
+				case 6:{
+					entradaAutomatica();
+					break;
+				}
 				case 0: {
 					System.out.println("Encerrando Sistema...");
 					System.exit(opcao);
@@ -70,6 +74,7 @@ public class Principal {
 		System.out.println("3 - Buscar Usuário");
 		System.out.println("4 - Remover Usuário");
 		System.out.println("5 - Entrada Manual");
+		System.out.println("6 - Entrada Automática");
 		System.out.println("0 - Sair");
 		System.out.println("----------------");
 
@@ -233,6 +238,17 @@ public class Principal {
 
 		System.out.println("----------------");
 		System.out.println(visitante);
+	}
+	
+	public static void entradaAutomatica() {
+		
+		System.out.println("Digite o nome:");
+		String nome = entrada.nextLine();
+		
+		String usuario = controleEstacionameto.EntradaAutomatica(nome);
+		
+		System.out.println("----------------");
+		System.out.println(usuario);
 	}
 
 }

@@ -47,17 +47,32 @@ public class ControleEstacionamento {
 	public String EntradaAutomatica(String nome) {
 		
 		Usuario usuario = buscarUsuario(nome);
+		String retorno = "";
 		
-		if((usuario instanceof Funcionario) && ((Funcionario) usuario).getNumeroVaga() != 0) {
+		usuario.Entrar();
+		
+		if(usuario instanceof Funcionario) {
 			
-			vagasReservadas++;
+			if(((Funcionario) usuario).getNumeroVaga() !=0) {
+				vagasReservadas++;
+			}
+			else {
+				retorno = BuscaVaga(usuario.getVeiculo());
+			}
+			
+			return "Entrada liberada tipo funcionário " + retorno;
+		}
+		else if(usuario instanceof Aluno){	
+			
+			retorno = BuscaVaga(usuario.getVeiculo());
+			
+			return "Entrada liberda tipo aluno " + retorno;
 		}
 		else {
 			
-			BuscaVaga(usuario.getVeiculo());
+			return "Usuário não cadastrado";
 		}
 		
-		return null;
 	}
 	
 	public Usuario buscarUsuario(String nome) {
