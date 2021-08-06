@@ -39,6 +39,14 @@ public abstract class Usuario {
 		return veiculo;
 	}
 
+	public Date getDataEntrada() {
+		return dataEntrada;
+	}
+
+	public Date getDataSaida() {
+		return dataSaida;
+	}
+
 	public Date Entrar() {
 		
 		return dataEntrada = new Date();

@@ -29,7 +29,7 @@ public class ControleEstacionamento {
 		this.vagasReservadas = 0;
 	}
 	
-	public String EntradaManual(String nome, String cpf, Predios predio, Veiculo carro) {
+	public String entradaManual(String nome, String cpf, Predios predio, Veiculo carro) {
 		
 		if(buscarUsuario(nome) != null) {
 			
@@ -40,37 +40,74 @@ public class ControleEstacionamento {
 		visitante.Entrar();
 		this.usuarios.add(visitante);
 		
-		String retorno = BuscaVaga(carro);
+		String retorno = buscaVaga(carro);
 		return "Entrada Liberada " + retorno;	
 	}
 	
-	public String EntradaAutomatica(String nome) {
+	public String entradaAutomatica(String nome) {
 		
-		Usuario usuario = buscarUsuario(nome);
-		String retorno = "";
-		
-		usuario.Entrar();
-		
-		if(usuario instanceof Funcionario) {
+		try {		
+			Usuario usuario = buscarUsuario(nome);
+
+			String retorno = "";
+
+			usuario.Entrar();
 			
-			if(((Funcionario) usuario).getNumeroVaga() !=0) {
-				vagasReservadas++;
+			if(usuario instanceof Funcionario) {
+				
+				if(((Funcionario) usuario).getNumeroVaga() != 0) {
+					vagasReservadas++;
+				}
+				else {
+					retorno = buscaVaga(usuario.getVeiculo());
+				}
+				
+				return "Entrada liberada tipo funcionário " + retorno;
+			}
+			else if(usuario instanceof Aluno){	
+				
+				retorno = buscaVaga(usuario.getVeiculo());
+				
+				return "Entrada liberda tipo aluno " + retorno;
 			}
 			else {
-				retorno = BuscaVaga(usuario.getVeiculo());
+				
+				return "Usuário não cadastrado";
 			}
 			
-			return "Entrada liberada tipo funcionário " + retorno;
+		} catch(NullPointerException e) {
+			return "Cliente inexistente! \n";	
 		}
-		else if(usuario instanceof Aluno){	
+		
+	}
+	
+	public String saida(String nome, String estacionamento) {
+		
+		try {	
+			Usuario usuario = buscarUsuario(nome);
+			usuario.Sair();
 			
-			retorno = BuscaVaga(usuario.getVeiculo());
+			if(estacionamento.equals("A")) {
+				this.vagasCarroA--;
+			}
+			else if(estacionamento.equals("B")) {
+				this.vagasCarroB--;
+			}
+			else if(estacionamento.equals("C")) {
+				this.vagasCarroC--;
+			}
+			else if(estacionamento.equals("M")) {
+				this.vagasMoto--;
+			}
+			else if(estacionamento.equals("R")) {
+				this.vagasReservadas--;
+			}
 			
-			return "Entrada liberda tipo aluno " + retorno;
-		}
-		else {
+			return "Usuário " + usuario.getNome() + " deixou o estacionamento";
 			
-			return "Usuário não cadastrado";
+		} catch(NullPointerException e) {
+			
+			return "Cliente inexistente! \n";	
 		}
 		
 	}
@@ -81,7 +118,7 @@ public class ControleEstacionamento {
 		return usuario;
 	}
 	
-	public String BuscaVaga(Veiculo veiculo) {
+	public String buscaVaga(Veiculo veiculo) {
 		
 		String retorno = "";
 		
@@ -148,6 +185,44 @@ public class ControleEstacionamento {
 			
 			return false;
 		}	
+	}
+	
+	public String estatisticasEstacionamento() {
+		
+		int vagasA = 500 - this.vagasCarroA;
+		int vagasB = 500 - this.vagasCarroB;
+		int vagasC = 500 - this.vagasCarroC;
+		int vagasM = 100 - this.vagasMoto;
+		
+		return "Estatísticas \n" + 
+		       "------------ \n" +
+			   "Vagas estacionamento A    = " + vagasA + "\n" +
+			   "Vagas estacionamento B    = " + vagasB + "\n" +
+			   "Vagas estacionamento C    = " + vagasC + "\n" +
+			   "Vagas estacionamento Moto = " + vagasM + "\n" +
+			   "Vagas reservadas = " + this.vagasReservadas;
+	}
+	
+	public String listar() {
+		
+		String mostraInfo = "";
+		
+		for(Usuario usuario : usuarios) {
+			try {
+				
+				mostraInfo += "Id:   " + usuario.getId() + " | ";
+				mostraInfo += "Nome: " + usuario.getNome() + " | ";
+				mostraInfo += "Telefone: " + usuario.getTelefone() + " | ";
+				mostraInfo += "Veículo: " + usuario.getVeiculo() + " | ";
+				mostraInfo += "DataEntrada: "  + usuario.getDataEntrada() + " | ";
+				mostraInfo += "DataSaída: "  + usuario.getDataSaida() + " | \n";
+				
+			} catch(NullPointerException e) {
+				System.out.println("Cliente inexistente! \n");
+			}
+		}
+		
+		return mostraInfo;
 	}
 	
 }

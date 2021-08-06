@@ -10,7 +10,6 @@ import br.edu.ufabc.poo.estacionamento.modelo.Aluno;
 import br.edu.ufabc.poo.estacionamento.modelo.Funcionario;
 import br.edu.ufabc.poo.estacionamento.modelo.Usuario;
 import br.edu.ufabc.poo.estacionamento.modelo.Veiculo;
-import br.edu.ufabc.poo.estacionamento.modelo.Visitante;
 
 public class Principal {
 	
@@ -49,8 +48,20 @@ public class Principal {
 					entradaManual();
 					break;
 				}
-				case 6:{
+				case 6: {
 					entradaAutomatica();
+					break;
+				}
+				case 7: {
+					Sair();
+					break;
+				}
+				case 8: {
+					EstatisticasEstacionamento();
+					break;
+				}
+				case 9: {
+					Listar();
 					break;
 				}
 				case 0: {
@@ -68,14 +79,19 @@ public class Principal {
 	private static int menu() {
 		
 		System.out.println("\n");
+		System.out.println("Estacionamento UFABC");
 		System.out.println("Digite uma opção:");
+		System.out.println("----------------");
 		System.out.println("1 - Adicionar Aluno");
 		System.out.println("2 - Adicionar Funcionário");
 		System.out.println("3 - Buscar Usuário");
 		System.out.println("4 - Remover Usuário");
 		System.out.println("5 - Entrada Manual");
 		System.out.println("6 - Entrada Automática");
-		System.out.println("0 - Sair");
+		System.out.println("7 - Sair");
+		System.out.println("8 - Estatísticas");
+		System.out.println("9 - Listar");
+		System.out.println("0 - Encerrar");
 		System.out.println("----------------");
 
 		return Integer.parseInt(entrada.nextLine());
@@ -234,7 +250,7 @@ public class Principal {
 		
 		Veiculo veiculo = cadastrarVeiculo();
 		
-		String visitante = controleEstacionameto.EntradaManual(nome, cpf, predio, veiculo);
+		String visitante = controleEstacionameto.entradaManual(nome, cpf, predio, veiculo);
 
 		System.out.println("----------------");
 		System.out.println(visitante);
@@ -245,10 +261,40 @@ public class Principal {
 		System.out.println("Digite o nome:");
 		String nome = entrada.nextLine();
 		
-		String usuario = controleEstacionameto.EntradaAutomatica(nome);
+		String usuario = controleEstacionameto.entradaAutomatica(nome);
 		
 		System.out.println("----------------");
 		System.out.println(usuario);
+	}
+	
+	public static void Sair() {
+		
+		System.out.println("Digite o nome:");
+		String nome = entrada.nextLine();
+		
+		System.out.println("Digite o estacionamento:");
+		String estacionamento = entrada.nextLine();
+		
+		String retorno = controleEstacionameto.saida(nome, estacionamento);
+		
+		System.out.println("----------------");
+		System.out.println(retorno);	
+	}
+	
+	public static void EstatisticasEstacionamento() {
+		
+		String retorno = controleEstacionameto.estatisticasEstacionamento();
+		
+		System.out.println("----------------");
+		System.out.println(retorno);
+	}
+	
+	public static void Listar() {
+		
+		String retorno = controleEstacionameto.listar();
+		
+		System.out.println("----------------");
+		System.out.println(retorno);
 	}
 
 }
