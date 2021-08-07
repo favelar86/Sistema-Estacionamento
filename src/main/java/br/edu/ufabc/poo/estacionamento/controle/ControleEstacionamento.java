@@ -37,7 +37,7 @@ public class ControleEstacionamento {
 		}
 		
 		Visitante visitante = new Visitante(nome, cpf, predio, carro);
-		visitante.Entrar();
+		visitante.entrar();
 		this.usuarios.add(visitante);
 		
 		String retorno = buscaVaga(carro);
@@ -51,7 +51,7 @@ public class ControleEstacionamento {
 
 			String retorno = "";
 
-			usuario.Entrar();
+			usuario.entrar();
 			
 			if(usuario instanceof Funcionario) {
 				
@@ -85,7 +85,7 @@ public class ControleEstacionamento {
 		
 		try {	
 			Usuario usuario = buscarUsuario(nome);
-			usuario.Sair();
+			usuario.sair();
 			
 			if(estacionamento.equals("A")) {
 				this.vagasCarroA--;

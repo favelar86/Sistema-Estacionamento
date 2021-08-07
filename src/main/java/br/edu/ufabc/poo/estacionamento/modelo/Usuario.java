@@ -47,12 +47,12 @@ public abstract class Usuario {
 		return dataSaida;
 	}
 
-	public Date Entrar() {
+	public Date entrar() {
 		
 		return dataEntrada = new Date();
 	}
 	
-	public Date Sair() {
+	public Date sair() {
 		
 		return dataSaida = new Date();
 	}
