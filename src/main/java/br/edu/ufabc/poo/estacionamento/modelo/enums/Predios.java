@@ -1,4 +1,4 @@
-package br.edu.ufabc.poo.estacionamento.enums;
+package br.edu.ufabc.poo.estacionamento.modelo.enums;
 
 public enum Predios {
 	

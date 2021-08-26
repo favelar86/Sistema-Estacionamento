@@ -1,7 +1,7 @@
 package br.edu.ufabc.poo.estacionamento.modelo;
 
 import java.text.SimpleDateFormat;
-import br.edu.ufabc.poo.estacionamento.enums.Predios;
+import br.edu.ufabc.poo.estacionamento.modelo.enums.Predios;
 
 public class Visitante extends Usuario {
 	

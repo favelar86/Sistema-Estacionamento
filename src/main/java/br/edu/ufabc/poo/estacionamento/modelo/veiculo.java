@@ -1,5 +1,6 @@
 package br.edu.ufabc.poo.estacionamento.modelo;
-import br.edu.ufabc.poo.estacionamento.enums.TipoVeiculo;
+
+import br.edu.ufabc.poo.estacionamento.modelo.enums.TipoVeiculo;
 
 public class Veiculo {
 	
@@ -32,7 +33,7 @@ public class Veiculo {
 
 	@Override
 	public String toString() {
-		return "placa=" + placa + ", tipoVeiculo=" + tipoVeiculo + ", modelo=" + modelo;
+		return "placa= " + placa + ", tipoVeiculo= " + tipoVeiculo + ", modelo= " + modelo;
 	}
 	
 }

@@ -2,7 +2,7 @@ package br.edu.ufabc.poo.estacionamento.modelo;
 
 import java.text.SimpleDateFormat;
 
-import br.edu.ufabc.poo.estacionamento.enums.Turno;
+import br.edu.ufabc.poo.estacionamento.modelo.enums.Turno;
 
 public class Aluno extends Usuario {
 	

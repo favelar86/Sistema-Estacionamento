@@ -2,6 +2,8 @@ package br.edu.ufabc.poo.estacionamento.modelo;
 
 import java.util.Date;
 
+import br.edu.ufabc.poo.estacionamento.modelo.excecao.DomainException;
+
 public abstract class Usuario {
 	
 	private static int ultimoId = 0;
@@ -35,6 +37,10 @@ public abstract class Usuario {
 		this.telefone = telefone;
 	}
 
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
 	public Veiculo getVeiculo() {
 		return veiculo;
 	}
@@ -48,13 +54,19 @@ public abstract class Usuario {
 	}
 
 	public Date entrar() {
+		if(this.dataEntrada != null) {
+			throw new DomainException("Erro: Usuário já registrou entrada");
+		}
 		
-		return dataEntrada = new Date();
+		return this.dataEntrada = new Date();
 	}
 	
 	public Date sair() {
+		if(this.dataEntrada == null) {
+			throw new DomainException("Erro: Usuário não registrou entrada");
+		}
 		
-		return dataSaida = new Date();
+		return this.dataSaida = new Date();
 	}
 	
 }

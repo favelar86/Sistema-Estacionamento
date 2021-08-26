@@ -1,9 +1,10 @@
 package br.edu.ufabc.poo.estacionamento.controle;
 
 import java.util.ArrayList;
-import br.edu.ufabc.poo.estacionamento.enums.Predios;
-import br.edu.ufabc.poo.estacionamento.enums.TipoVeiculo;
-import br.edu.ufabc.poo.estacionamento.enums.Turno;
+import br.edu.ufabc.poo.estacionamento.modelo.enums.Predios;
+import br.edu.ufabc.poo.estacionamento.modelo.enums.TipoVeiculo;
+import br.edu.ufabc.poo.estacionamento.modelo.enums.Turno;
+import br.edu.ufabc.poo.estacionamento.modelo.excecao.DomainException;
 import br.edu.ufabc.poo.estacionamento.modelo.Funcionario;
 import br.edu.ufabc.poo.estacionamento.modelo.Usuario;
 import br.edu.ufabc.poo.estacionamento.modelo.Veiculo;
@@ -33,7 +34,7 @@ public class ControleEstacionamento {
 		
 		if(buscarUsuario(nome) != null) {
 			
-			return "Entrada não Liberada: Usuário já possuí cadastro";
+			throw new DomainException("Erro: Entrada não Liberada: Usuário já possuí cadastro");
 		}
 		
 		Visitante visitante = new Visitante(nome, cpf, predio, carro);
@@ -51,28 +52,34 @@ public class ControleEstacionamento {
 
 			String retorno = "";
 
-			usuario.entrar();
-			
-			if(usuario instanceof Funcionario) {
+			try {
+				usuario.entrar();
 				
-				if(((Funcionario) usuario).getNumeroVaga() != 0) {
-					vagasReservadas++;
+				if(usuario instanceof Funcionario) {
+					
+					if(((Funcionario) usuario).getNumeroVaga() != 0) {
+						vagasReservadas++;
+					}
+					else {
+						retorno = buscaVaga(usuario.getVeiculo());
+					}
+					
+					return "Entrada liberada tipo funcionário " + retorno;
+				}
+				else if(usuario instanceof Aluno){	
+					
+					retorno = buscaVaga(usuario.getVeiculo());
+					
+					return "Entrada liberda tipo aluno " + retorno;
 				}
 				else {
-					retorno = buscaVaga(usuario.getVeiculo());
+					
+					return "Usuário não cadastrado";
 				}
 				
-				return "Entrada liberada tipo funcionário " + retorno;
 			}
-			else if(usuario instanceof Aluno){	
-				
-				retorno = buscaVaga(usuario.getVeiculo());
-				
-				return "Entrada liberda tipo aluno " + retorno;
-			}
-			else {
-				
-				return "Usuário não cadastrado";
+			catch(DomainException e) {
+				return "" + e;
 			}
 			
 		} catch(NullPointerException e) {
@@ -85,7 +92,13 @@ public class ControleEstacionamento {
 		
 		try {	
 			Usuario usuario = buscarUsuario(nome);
-			usuario.sair();
+			
+			try {
+				usuario.sair();
+			}
+			catch(DomainException e) {
+				System.out.println(e);
+			}
 			
 			if(estacionamento.equals("A")) {
 				this.vagasCarroA--;
@@ -180,7 +193,6 @@ public class ControleEstacionamento {
 			return true;
 		}
 		catch(IndexOutOfBoundsException e) {
-			System.out.println("\n");
 			System.out.println("Esse Id não existe!");
 			
 			return false;
@@ -211,11 +223,11 @@ public class ControleEstacionamento {
 			try {
 				
 				mostraInfo += "Id:   " + usuario.getId() + " | ";
-				mostraInfo += "Nome: " + usuario.getNome() + " | ";
-				mostraInfo += "Telefone: " + usuario.getTelefone() + " | ";
-				mostraInfo += "Veículo: " + usuario.getVeiculo() + " | ";
-				mostraInfo += "DataEntrada: "  + usuario.getDataEntrada() + " | ";
-				mostraInfo += "DataSaída: "  + usuario.getDataSaida() + " | \n";
+				mostraInfo += "Nome: " + usuario.getNome() + " - ";
+				mostraInfo += "Telefone: " + usuario.getTelefone() + " - ";
+				mostraInfo += "Veículo: " + usuario.getVeiculo() + " - ";
+				mostraInfo += "DataEntrada: "  + usuario.getDataEntrada() + " - ";
+				mostraInfo += "DataSaída: "  + usuario.getDataSaida() + " \n";
 				
 			} catch(NullPointerException e) {
 				System.out.println("Cliente inexistente! \n");
